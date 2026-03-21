@@ -1,0 +1,39 @@
+{
+  "name": "sod-template",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev typegen schemagen",
+    "lint": "turbo run lint",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "licenses": "node scripts/check-licenses.mjs",
+    "typecheck": "turbo run typecheck",
+    "typegen": "turbo run typegen",
+    "test": "turbo run test",
+    "ci": "pnpm run fmt:check && pnpm run licenses && turbo run lint typecheck test:ci",
+    "deploy": "turbo run studio#deploy",
+    "singletons": "pnpm --filter studio run singletons",
+    "prepare": "husky",
+    "seed": "pnpm --filter studio run seed",
+    "backup": "pnpm --filter studio run backup"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "oxfmt": "^0.35.0",
+    "spdx-expression-parse": "4.0.0",
+    "turbo": "^2.8.11",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@10.30.3+sha512.c961d1e0a2d8e354ecaa5166b822516668b7f44cb5bd95122d590dd81922f606f5473b6d23ec4a5be05e7fcd18e8488d47d978bbe981872f1145d06e9a740017",
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
+}

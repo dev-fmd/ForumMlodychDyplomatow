@@ -1,0 +1,46 @@
+{
+  "name": "studio",
+  "version": "1.0.0",
+  "private": true,
+  "keywords": [
+    "sanity"
+  ],
+  "license": "UNLICENSED",
+  "main": "package.json",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity typegen generate --watch",
+    "schemagen": "sanity schema extract --watch",
+    "singletons": "pnpm exec sanity exec ./scripts/createSingletons.ts --with-user-token",
+    "login": "sanity login",
+    "backup": "sanity dataset export development ./backups/development.tar.gz && sanity dataset export production ./backups/development.tar.gz",
+    "seed": "pnpm run backup && sanity dataset delete development && sanity dataset create development && sanity dataset import ./backups/production.tar.gz development"
+  },
+  "dependencies": {
+    "@sanity/dashboard": "^5.0.1",
+    "@sanity/document-internationalization": "^5.1.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/locale-pl-pl": "^1.2.27",
+    "@sanity/ui": "^3.1.13",
+    "@sanity/vision": "5.13.0",
+    "react": "^19.1",
+    "react-dom": "^19.1",
+    "sanity": "5.13.0",
+    "sanity-plugin-dashboard-widget-vercel": "^3.1.6",
+    "sanity-plugin-icon-picker": "^4.0.0",
+    "sanity-plugin-media": "^4.1.1",
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1",
+    "oxlint": "^1.50.0",
+    "typescript": "^5.8"
+  }
+}

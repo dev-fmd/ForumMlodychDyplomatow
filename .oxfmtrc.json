@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "endOfLine": "lf",
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "**/build/**",
+    "**/dist/**",
+    "**/.turbo/**",
+    "**/.sanity/**",
+    "**/.pnpm-store/**",
+    "**/backups/**",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml"
+  ]
+}

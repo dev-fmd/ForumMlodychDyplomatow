@@ -1,0 +1,60 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "NEXT_PUBLIC_ORIGIN",
+    "DEFAULT_REVALIDATE",
+    "SANITY_STUDIO_PROJECT_ID",
+    "SANITY_STUDIO_ORGANIZATION_ID",
+    "SANITY_STUDIO_DATASET",
+    "SANITY_STUDIO_API_VERSION",
+    "SANITY_STUDIO_APP_ID",
+    "SANITY_STUDIO_PREVIEW_URL",
+    "SANITY_REVALIDATE_SECRET",
+    "SANITY_API_READ_TOKEN",
+    "NEXT_PUBLIC_SANITY_PROJECT_ID",
+    "NEXT_PUBLIC_SANITY_ORGANIZATION_ID",
+    "NEXT_PUBLIC_SANITY_DATASET",
+    "NEXT_PUBLIC_SANITY_API_VERSION",
+    "NEXT_PUBLIC_SANITY_USE_CDN",
+    "NEXT_PUBLIC_SANITY_IMAGE_QUALITY",
+    "NEXT_PUBLIC_SANITY_STUDIO_URL",
+    "SANITY_AUTH_TOKEN",
+    "CI"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist"]
+    },
+    "schemagen": {
+      "cache": false,
+      "persistent": true
+    },
+    "typegen": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:ci": {
+      "dependsOn": ["^test:ci"]
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "cache": false
+    }
+  }
+}

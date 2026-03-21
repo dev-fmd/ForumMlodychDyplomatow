@@ -1,0 +1,48 @@
+name: mirror
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - dev
+
+jobs:
+  mirror:
+    if: false
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set git identity
+        run: |
+          git config user.name "${{ vars.GIT_USER }}"
+          git config user.email "${{ vars.GIT_EMAIL }}"
+
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: "${{ secrets.SSH_PRIVATE_KEY }}"
+
+      - name: Add GitHub to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Add target remote as mirror
+        run: git remote add mirror "${{ vars.TARGET_REPO }}"
+
+      - name: Remove workflows
+        run: git rm -rf .github/workflows || true
+
+      - name: Commit changes
+        run: git commit --allow-empty -m "Commit from $GITHUB_REF [bot]" || true
+
+      - name: Push to mirror
+        run: |
+          branch=${GITHUB_REF#refs/heads/}
+          git push -f mirror $branch || exit 1

@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-brand-500: #412bcc;
+  --color-brand-400: #523cdf;
+  --color-brand-300: #6852f5;
+  --color-brand-200: #7f6bfe;
+  --color-brand-100: #9584ff;
+  --color-muted: #a4a4a4;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  .heading-1 {
+    @apply text-4xl font-bold leading-tight mb-4;
+  }
+  .heading-2 {
+    @apply text-3xl font-semibold leading-snug mb-3;
+  }
+  .heading-3 {
+    @apply text-2xl font-medium leading-snug mb-2.5;
+  }
+  .heading-4 {
+    @apply text-xl font-medium leading-snug mb-2;
+  }
+
+  .body-base {
+    @apply text-base leading-relaxed mb-4;
+  }
+  .body-lg {
+    @apply text-lg leading-relaxed mb-5;
+  }
+  .body-sm {
+    @apply text-sm leading-relaxed mb-3;
+  }
+
+  .lead {
+    @apply text-lg text-brand-100 leading-relaxed mb-5;
+  }
+  .link {
+    @apply text-brand-300 hover:text-brand-500 underline cursor-pointer;
+  }
+  .caption {
+    @apply text-sm text-muted leading-snug;
+  }
+}

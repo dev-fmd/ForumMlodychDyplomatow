@@ -1,0 +1,63 @@
+name: pull-request
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+      - dev
+
+env:
+  SANITY_STUDIO_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+  SANITY_STUDIO_ORGANIZATION_ID: ${{ vars.SANITY_ORGANIZATION_ID }}
+  SANITY_STUDIO_DATASET: ${{ vars.SANITY_DATASET }}
+  SANITY_STUDIO_API_VERSION: ${{ vars.SANITY_API_VERSION }}
+  SANITY_STUDIO_APP_ID: ${{ vars.SANITY_APP_ID }}
+  SANITY_REVALIDATE_SECRET: "dummy"
+  SANITY_API_READ_TOKEN: "dummy"
+  NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+  NEXT_PUBLIC_SANITY_ORGANIZATION_ID: ${{ vars.SANITY_ORGANIZATION_ID }}
+  NEXT_PUBLIC_SANITY_DATASET: ${{ vars.SANITY_DATASET }}
+  NEXT_PUBLIC_SANITY_API_VERSION: ${{ vars.SANITY_API_VERSION }}
+  NEXT_PUBLIC_SANITY_USE_CDN: false
+  NEXT_PUBLIC_SANITY_IMAGE_QUALITY: 1
+  NEXT_PUBLIC_ORIGIN: "http://localhost"
+  TURBO_TELEMETRY_DISABLED: 1
+  DEFAULT_REVALIDATE: "1000"
+  CI: true
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Cache turbo build outputs
+        uses: actions/cache@v5
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm run fmt:check
+
+      - name: Check dependency licenses
+        run: pnpm run licenses
+
+      - name: CI
+        run: pnpm turbo run lint typecheck test:ci
+
+      - name: Build
+        run: pnpm build
