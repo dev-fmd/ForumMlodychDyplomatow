@@ -10,7 +10,6 @@ on:
 
 jobs:
   mirror:
-    if: false
     runs-on: ubuntu-latest
 
     steps:
