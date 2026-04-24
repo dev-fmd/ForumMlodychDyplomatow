@@ -1,5 +1,6 @@
-import { createGroqBuilder } from "groqd";
+import { createGroqBuilder, makeSafeQueryRunner } from "groqd";
 import * as SanityTypes from "./typegen";
+import { sanityFetch } from "./live";
 
 type GroqdContext = {
   schemaTypes: SanityTypes.AllSanitySchemaTypes;
@@ -12,5 +13,9 @@ type GroqdContext = {
  * @example `q.star(filterByType("post")).order('price desc')`
  */
 const q = createGroqBuilder<GroqdContext>();
+
+export const runQuery = makeSafeQueryRunner((query, options) =>
+  sanityFetch({ query, params: options?.parameters }).then((res) => res.data)
+);
 
 export { q };

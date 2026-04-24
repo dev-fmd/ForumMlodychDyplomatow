@@ -10,8 +10,8 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { locales } from "@/i18n/locales";
+import ChangeLocaleLink from "../../components/ChangeLocaleLink";
 
 /** This is the base metadata for the entire project, it will cascade down to subpages
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function */
@@ -71,9 +71,9 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <div className="flex justify-center gap-3 uppercase pt-5">
             {locales.map((l) => (
-              <Link key={l} href="/" locale={l}>
-                {l}
-              </Link>
+              <ChangeLocaleLink key={l} locale={l}>
+                {l.toLocaleUpperCase()}
+              </ChangeLocaleLink>
             ))}
           </div>
           {children}

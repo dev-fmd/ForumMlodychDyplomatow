@@ -1,7 +1,15 @@
 import { StructureToolOptions } from "sanity/structure";
 import { SingleLanguageSingleton as Singleton, TranslationMetadata as Translations } from "./intl";
 import { SingleLanguageList as Collection } from "./intl";
-import { ComposeIcon, HomeIcon, UsersIcon, CogIcon, TranslateIcon } from "@sanity/icons";
+import {
+  CalendarIcon,
+  CogIcon,
+  ComposeIcon,
+  EarthGlobeIcon,
+  HomeIcon,
+  TranslateIcon,
+  UsersIcon,
+} from "@sanity/icons";
 
 /**
  * Structure of the Sanity Studio
@@ -18,6 +26,8 @@ export const structure: StructureToolOptions = {
         S.divider().title("Kolekcje"),
         Collection(S, { type: "post", title: "Wpisy", icon: ComposeIcon }),
         Collection(S, { type: "author", title: "Autorzy", icon: UsersIcon }),
+        Collection(S, { type: "event", title: "Wydarzenia", icon: CalendarIcon }),
+        Collection(S, { type: "region", title: "Przedstawicielstwa", icon: EarthGlobeIcon }),
         S.divider().title("Ustawienia"),
         Singleton(S, { type: "settings", title: "Ustawienia", icon: CogIcon }),
         S.divider().title("Tłumaczenia"),

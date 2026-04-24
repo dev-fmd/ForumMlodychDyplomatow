@@ -25,5 +25,7 @@ export const DOCUMENTS: DocumentConfig[] = [
   { _type: "home", id: "home", intl: true, singleton: true, root: true },
   { _type: "settings", id: "settings" },
   { _type: "post", intl: true, path: "/post", slug: true },
+  { _type: "event", intl: true },
+  { _type: "region", intl: true },
   { _type: "author", intl: true },
 ];

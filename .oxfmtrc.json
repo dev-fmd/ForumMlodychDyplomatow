@@ -17,6 +17,7 @@
     "**/.pnpm-store/**",
     "**/backups/**",
     "pnpm-lock.yaml",
-    "pnpm-workspace.yaml"
+    "pnpm-workspace.yaml",
+    "**/typegen.ts"
   ]
 }

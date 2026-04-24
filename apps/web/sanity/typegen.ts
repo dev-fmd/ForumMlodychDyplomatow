@@ -130,6 +130,20 @@ export type PostReference = {
   [internalGroqTypeReferenceTo]?: "post";
 };
 
+export type EventReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "event";
+};
+
+export type RegionReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "region";
+};
+
 export type AuthorReference = {
   _ref: string;
   _type: "reference";
@@ -139,7 +153,51 @@ export type AuthorReference = {
 
 export type InternationalizedArrayReferenceValue = {
   _type: "internationalizedArrayReferenceValue";
-  value?: HomeReference | PostReference | AuthorReference;
+  value?:
+    | HomeReference
+    | PostReference
+    | EventReference
+    | RegionReference
+    | AuthorReference;
+};
+
+export type Event = {
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  locale?: string;
+  seo?: Seo;
+  name?: string;
+  slug?: Slug;
+  startDate?: string;
+  endDate?: string;
+  region?: RegionReference;
+  venue?: string;
+  address?: string;
+  excerpt?: string;
+  description?: RichText;
+  image?: Img;
+  registrationUrl?: string;
+};
+
+export type Region = {
+  _id: string;
+  _type: "region";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  locale?: string;
+  seo?: Seo;
+  name?: string;
+  slug?: Slug;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type CategoryReference = {
@@ -198,12 +256,6 @@ export type Author = {
     _type: "block";
     _key: string;
   }>;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type Home = {
@@ -365,12 +417,16 @@ export type AllSanitySchemaTypes =
   | InternationalizedArrayReference
   | HomeReference
   | PostReference
+  | EventReference
+  | RegionReference
   | AuthorReference
   | InternationalizedArrayReferenceValue
+  | Event
+  | Region
+  | Slug
   | CategoryReference
   | Post
   | Author
-  | Slug
   | Home
   | SanityImageCrop
   | SanityImageHotspot
