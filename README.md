@@ -37,6 +37,18 @@ To start both applications in development mode:
 pnpm dev
 ```
 
+## DEBUGGING
+
+### FASTEST
+
+Open terminal in `ForumMlodychDyplomatow/apps/web`
+
+VSC - open command aplette `ctrl+shift+p`
+
+Run `Debug: JavaScript Debug Terminal`
+
+in that termianl start web app `pnpm --filter web dev`
+
 This runs both the **Sanity Studio** and the **Next.js app** concurrently using **Turbo**.
 
 ## 🔑 Environment Variables

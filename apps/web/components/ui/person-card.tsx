@@ -13,6 +13,7 @@ export const PersonCard = ({ person }: { person: PersonCardType }) => {
           default: "400px",
           desktop: "300px",
         }}
+        placeholder="person"
       />
       <div className="flex grow flex-col items-center justify-between gap-6 p-6">
         <div className="flex flex-col gap-4 text-gray-900">
