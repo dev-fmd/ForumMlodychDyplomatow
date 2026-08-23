@@ -146,6 +146,20 @@ export default defineType({
       group: "footer",
       description: "Tekst wyświetlany na samym dole stopki, np. informacja o prawach autorskich.",
     }),
+    defineField({
+      name: "madeBy",
+      title: "Wykonanie",
+      type: "string",
+      group: "footer",
+      description: "Tekst wyświetlany na samym dole stopki",
+    }),
+    defineField({
+      name: "madeByLink",
+      title: "Link do wykonawcy",
+      type: "link",
+      group: "footer",
+      description: "Link do wykonawcy wyświetlany na samym dole stopki",
+    }),
     languageField,
   ],
   preview: {

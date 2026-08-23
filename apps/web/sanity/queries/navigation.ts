@@ -37,6 +37,8 @@ export const navigationQuery = q
       })),
       additionalLinks: sub.field("additionalLinks[]").project(linkFragment),
       copyright: sub.field("copyright"),
+      madeByLink: sub.field("madeByLink").project(linkFragment),
+      madeByText: sub.field("madeBy"),
     }),
   }));
 

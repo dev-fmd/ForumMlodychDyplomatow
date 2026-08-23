@@ -91,7 +91,8 @@ const Footer = async ({
           <LocaleButtons />
         </div>
       </div>
-      <div className="flex w-full flex-col-reverse desktop:flex-row desktop:justify-between">
+      <Separator />
+      <div className="flex w-full flex-col-reverse desktop:flex-row desktop:items-center desktop:justify-between">
         <Typography variant="caption">{footer.copyright}</Typography>
         <div className="flex flex-col items-start justify-end desktop:flex-row desktop:gap-2">
           {footer.additionalLinks?.map((link, index) => (
@@ -108,6 +109,23 @@ const Footer = async ({
           ))}
         </div>
       </div>
+      {(footer.madeByLink || footer.madeByText) && (
+        <>
+          <Separator />
+          <div className="flex w-full flex-row items-center justify-start whitespace-pre">
+            <Typography as="span" variant="caption">
+              {footer.madeByText}{" "}
+            </Typography>
+            {footer.madeByLink && (
+              <Link link={footer.madeByLink} variant="text" className="font-normal" size="inline">
+                <Typography as="span" variant="caption">
+                  {footer.madeByLink.text}
+                </Typography>
+              </Link>
+            )}
+          </div>
+        </>
+      )}
     </footer>
   );
 };

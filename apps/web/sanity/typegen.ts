@@ -937,6 +937,8 @@ export type Navigation = {
     } & Link
   >;
   copyright?: string;
+  madeBy?: string;
+  madeByLink?: Link;
   locale?: string;
 };
 

@@ -5423,6 +5423,21 @@
         },
         "optional": true
       },
+      "madeBy": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "madeByLink": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "link"
+        },
+        "optional": true
+      },
       "locale": {
         "type": "objectAttribute",
         "value": {
