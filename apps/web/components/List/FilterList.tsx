@@ -1,8 +1,8 @@
 "use client";
 import type { Locale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { parseAsArrayOf, parseAsInteger, parseAsString, useQueryStates } from "nuqs";
-import React, { useEffect, useMemo, useState, useTransition } from "react";
+import { parseAsArrayOf, parseAsInteger, parseAsString, useQueryState, useQueryStates } from "nuqs";
+import React, { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { X, List, ChevronLeft } from "lucide-react";
 import { cn } from "../../lib/utils";
 import type { PaginationQueryFunction, PaginationResult } from "../../sanity/queries/pagination";
@@ -81,7 +81,6 @@ type FilterResultType = typeof parseAsString | ReturnType<typeof parseAsArrayOf<
 
 const createFilterListParams = (filters: Filter[], tabs?: TabsType) => {
   return {
-    page: parseAsInteger.withDefault(1),
     q: parseAsString,
     sort: parseAsString.withDefault("desc"),
     ...(Object.fromEntries(
@@ -104,6 +103,8 @@ const createFilterListParams = (filters: Filter[], tabs?: TabsType) => {
       : {}),
   };
 };
+
+const pageParam = parseAsInteger.withDefault(1);
 
 // --- FUNKCJE POMOCNICZE (WYCIĄGNIĘTE POZA KOMPONENT) ---
 
@@ -152,7 +153,7 @@ export const FilterList = <
 }: Props<T, TParams>) => {
   const t = useTranslations("filterComponent");
   const [isPending, startTransition] = useTransition();
-
+  const scrollToTopRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const paramsParser = useMemo(
@@ -162,6 +163,12 @@ export const FilterList = <
   );
 
   const [params, setParams] = useQueryStates(paramsParser);
+  const [page, setPage] = useQueryState(
+    "page",
+    pageParam.withOptions({
+      scroll: true,
+    })
+  );
   const [data, setData] = useState<PaginationResult<T> | null>(null);
 
   // Zoptymalizowane wyliczenie aktywnych filtrów w jednym przejściu
@@ -183,21 +190,22 @@ export const FilterList = <
     } else {
       setParams({ [slug]: null } as Partial<typeof params>);
     }
-    setParams({ page: 1 } as Partial<typeof params>);
+    setPage(1);
   };
 
   const handleResetFilters = () => {
-    const resetObj: Record<string, string | number | null> = { q: null, page: 1 };
+    const resetObj: Record<string, string | number | null> = { q: null };
     filters.forEach((f) => {
       resetObj[f.slug] = null;
     });
     setParams(resetObj as Partial<typeof params>);
+    setPage(1);
   };
 
   useEffect(() => {
     startTransition(async () => {
       const result = await queryAction({
-        page: params.page ?? 1,
+        page: page ?? 1,
         perPage,
         q: params.q ?? undefined,
         filters: {
@@ -219,7 +227,7 @@ export const FilterList = <
       setData(result);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(params), locale, perPage]);
+  }, [JSON.stringify(params), page, locale, perPage]);
 
   const renderFiltersList = () => (
     <>
@@ -307,6 +315,7 @@ export const FilterList = <
 
   return (
     <FilterListContext.Provider value={{ isPending, startTransition }}>
+      <div ref={scrollToTopRef} />
       {/* --- MOBILE DRAWER OVERLAY --- */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-100 flex flex-col bg-white desktop:hidden">
@@ -434,7 +443,8 @@ export const FilterList = <
                   className="cursor-pointer bg-transparent font-semibold text-gray-900 outline-none"
                   value={params.sort as string}
                   onChange={(e) => {
-                    setParams({ sort: e.target.value, page: 1 } as Partial<typeof params>);
+                    setParams({ sort: e.target.value });
+                    setPage(1);
                   }}
                 >
                   <option value="desc">{t("sortNewest")}</option>

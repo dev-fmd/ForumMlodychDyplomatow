@@ -20,7 +20,9 @@ import { getCliClient } from "sanity/cli";
 
 import { LANGUAGES, LANGUAGE_FIELD, DOCUMENTS } from "../config";
 
-const SINGLETONS = DOCUMENTS.filter((d) => d.singleton);
+const SINGLETONS = DOCUMENTS.filter(
+  (d) => "singleton" in d && d.singleton && "id" in d && d.id
+) as { id: string; _type: string; singleton: true }[];
 
 // This will use the client configured in ./sanity.cli.ts
 const client = getCliClient();

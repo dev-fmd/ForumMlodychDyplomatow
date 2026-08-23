@@ -143,6 +143,23 @@
   .caption {
     @apply text-sm text-muted leading-snug;
   }
+
+  ol.nested-list {
+    @apply list-none;
+    counter-reset: item;
+  }
+
+  ol.nested-list li {
+    counter-increment: item;
+  }
+
+  /* ol.nested-list li::before {
+    content: counters(item, ".") ". ";
+    @apply mr-2;
+  } */
+  ol.nested-list li::marker {
+    content: counters(item, ".") ". ";
+  }
 }
 
 :root {

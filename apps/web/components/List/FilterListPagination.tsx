@@ -14,6 +14,7 @@ export const usePage = () => {
     "page",
     parseAsIndex.withDefault(0).withOptions({
       history: "push",
+      scroll: true,
     })
   );
 };

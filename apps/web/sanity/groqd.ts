@@ -48,6 +48,7 @@ const makeCustomSafeQueryRunner = <TCustomOptions>(
       builder.query,
       options as QueryRunnerOptions & TCustomOptions
     );
+
     try {
       const parsed = builder.parse(results.data) ?? results.data;
       return { ...results, data: parsed };

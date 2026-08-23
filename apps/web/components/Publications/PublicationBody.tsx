@@ -15,7 +15,6 @@ export interface PublicationBodyProps {
   author?: {
     name: string;
     initials: string;
-    role?: string;
     imageUrl?: string;
   };
   date?: string;

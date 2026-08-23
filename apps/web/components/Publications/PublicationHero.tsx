@@ -28,7 +28,6 @@ export interface PublicationHeroProps {
   authors?: {
     name: string;
     initials: string;
-    role?: string;
     imageUrl?: string;
     bio?: string;
   }[];
@@ -101,7 +100,7 @@ export const PublicationHero = async ({
             <div className="flex w-fit flex-col justify-between gap-4 py-1 sm:flex-row sm:items-start">
               {authors && authors.length > 0 ? (
                 <div className="flex flex-col gap-2">
-                  <Author authors={authors} date={date} isoDate={isoDate} title={false} />
+                  <Author locale={locale} authors={authors} date={date} isoDate={isoDate} />
 
                   {authorData.isGroup && (
                     <GroupAuthorsList authors={authors} showAuthorsText={t("showAuthors")} />
@@ -136,10 +135,18 @@ export const PublicationHero = async ({
             </div>
           </div>{" "}
           {/* Prawa kolumna: Obraz */}
-          <div className="order-1 flex w-full flex-col gap-3 lg:order-2 lg:col-span-5 xl:col-span-6">
-            <div className="relative flex w-full items-center justify-center overflow-hidden">
+          <div className="order-1 flex h-full w-full flex-col gap-3 lg:order-2 lg:col-span-5 xl:col-span-6">
+            <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
               {image ? (
-                <GradientImage image={image} desktopSize="xl" />
+                <GradientImage
+                  sizes={{
+                    default: "80vw",
+                    desktop: "40vw",
+                  }}
+                  className="w-full desktop:px-16"
+                  image={image}
+                  desktopSize="xl"
+                />
               ) : (
                 <div className="flex flex-col items-center gap-2 text-brand-gray-600/50">
                   <ImageIcon className="h-12 w-12" />

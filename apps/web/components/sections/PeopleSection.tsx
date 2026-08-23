@@ -52,7 +52,7 @@ const PeopleSection = async ({ index, data }: PageBuilderSectionProps<"peopleSec
           </TabsContent>
         ))}
       </Tabs>
-      <div className="mx-auto mt-16 hidden w-fit desktop:block">
+      <div className="mx-auto mt-16 w-fit">
         {data.link && <Link link={data.link} variant="secondary" iconRight={<ChevronRight />} />}
       </div>
     </Container>

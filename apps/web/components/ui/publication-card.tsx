@@ -5,23 +5,24 @@ import { Link } from "./link";
 import { SanityImage } from "../../sanity/image/SanityImage";
 import { Tag } from "./tag";
 import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, type Locale } from "next-intl";
 import Author from "../Publications/Author";
 
 export interface PublicationCardProps {
   publication: PublicationCardType;
   layout?: "vertical" | "horizontal";
   className?: string;
+  locale: Locale;
 }
 
 export const PublicationCard = ({
   publication,
   layout = "vertical",
   className,
+  locale,
 }: PublicationCardProps) => {
   const { title, excerpt, authors, date, tags = [], mainImage: image, slug } = publication;
   const t = useTranslations("publications");
-
   return (
     <Link
       link={{
@@ -98,7 +99,7 @@ export const PublicationCard = ({
 
         {/* Stopka z autorem */}
         <div className="mt-6 flex w-full flex-col border-t border-slate-100 pt-5">
-          <Author authors={authors} date={date} title={true} />
+          <Author locale={locale} authors={authors} date={date} />
         </div>
       </div>
     </Link>

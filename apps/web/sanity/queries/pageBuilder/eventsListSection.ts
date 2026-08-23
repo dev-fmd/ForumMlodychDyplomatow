@@ -9,9 +9,11 @@ export const eventsListSectionFragment = q
     divisions: sub.star
       .filterByType("division")
       .filterBy("locale == $locale")
+      .filterRaw("defined(name) && defined(slug.current)")
       .project((sub) => ({
-        _id: sub.field("_id"),
-        name: sub.field("name"),
-        slug: sub.field("slug.current"),
-      })),
+        label: sub.field("name"),
+        sortName: sub.coalesce(sub.field("sortName"), sub.field("name")),
+        value: sub.field("slug.current"),
+      }))
+      .order("sortName asc"),
   }));

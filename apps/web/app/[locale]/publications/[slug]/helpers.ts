@@ -19,7 +19,6 @@ export const getInitials = (name: string) => {
 export type AuthorInput = {
   name?: string | null;
   initials?: string | null;
-  role?: string | null;
   imageUrl?: string | null;
   img?: AuthorImgType | null;
   bio?: string | null;
@@ -37,7 +36,6 @@ export const getAuthorDisplayData = async (
   return {
     isGroup,
     displayName: isGroup ? translations.groupName : (firstAuthor?.name ?? ""),
-    displayRole: isGroup ? "" : (firstAuthor?.role ?? ""),
     displayBio: isGroup ? "" : (firstAuthor?.bio ?? ""),
     displayImageUrl: isGroup ? defaultLogo : (firstAuthor?.imageUrl ?? undefined),
     displaySanityImage: isGroup ? null : (firstAuthor?.img ?? null),

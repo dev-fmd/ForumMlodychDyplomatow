@@ -18,7 +18,7 @@ export const pageQuery = q
     name: sub.field("name"),
     slug: sub.field("slug.current"),
     breadcrumbs: sub.field("breadcrumbs[]").project(breadcrumbsFragment),
-    pageBuilder: sub.field("pageBuilder[]").project(pageBuilderQueryFragment).notNull(),
+    pageBuilder: sub.field("pageBuilder[]").project(pageBuilderQueryFragment),
   }));
 
 export type PageData = InferResultType<typeof pageQuery>;

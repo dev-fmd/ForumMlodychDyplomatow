@@ -57,7 +57,10 @@ export const peoplePaginatedQuery = ({ page = 1, perPage = 10 }: PaginationParam
       total: sub.count("items[]"),
       page: sub.value(page),
       perPage: sub.value(perPage),
-      items: sub.field("items[]").project(personFragment),
+      items: sub
+        .field("items[]")
+        .project(personFragment)
+        .slice((page - 1) * perPage, page * perPage),
     }));
 
 export type PersonFull = InferFragmentType<typeof personFragment>;

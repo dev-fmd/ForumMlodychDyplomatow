@@ -77,12 +77,12 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
-
+  const { locale: paramLocale } = await params;
+  const locale = paramLocale ?? routing.defaultLocale;
   // Validating locale at root layout ensures it is valid everywhere
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  setRequestLocale(locale ?? "pl"); // Enables static rendering, this should be done in every page/layout
+  setRequestLocale(locale); // Enables static rendering, this should be done in every page/layout
   const [{ data: translations }, { data: navigation }, { data: orgSeo }] = await Promise.all([
     runQuery(intlQuery, { parameters: { locale } }),
     runQuery(navigationQuery, { parameters: { locale } }),
@@ -111,13 +111,13 @@ export default async function RootLayout({
               <main id="main-content" className="w-full" tabIndex={-1}>
                 {children}
               </main>
-              <Toaster />
-              <SanityPreview />
               <Footer
                 footer={navigation!.footer}
                 navigation={navigation!.navigation}
                 header={navigation!.header}
               />
+              <Toaster />
+              <SanityPreview />
             </NextIntlClientProvider>
           </SvgCacheProvider>
         </NuqsAdapter>

@@ -44,10 +44,10 @@ export const EventsListSection = async ({
           label: "Online",
           value: "online",
         },
-        ...(data.divisions?.map((division) => ({
-          label: division.name ?? "",
-          value: division.slug ?? "",
-        })) ?? []),
+        ...((data.divisions.filter((d) => d.label && d.value) as Array<{
+          label: string;
+          value: string;
+        }>) ?? []),
       ],
     },
   ];

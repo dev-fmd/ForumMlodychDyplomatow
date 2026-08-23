@@ -6,17 +6,17 @@ import { capitalize } from "../utils/utils";
 import { defineField } from "sanity";
 
 import { DOCUMENTS, LANGUAGE_FIELD, LANGUAGES } from "../config";
-const TRANSLATIONS = DOCUMENTS.filter((d) => d.intl).map((d) => d._type);
+const TRANSLATIONS = DOCUMENTS.filter((d) => "intl" in d && d.intl).map((d) => d._type);
 const API_VERSION = process.env.SANITY_STUDIO_API_VERSION;
 
 /** Config for `@sanity/document-internationalization` plugin */
 export const intlConfig: PluginConfig = {
-  supportedLanguages: LANGUAGES,
+  supportedLanguages: LANGUAGES as any,
   schemaTypes: TRANSLATIONS,
   languageField: LANGUAGE_FIELD,
 };
 export const intlArrayConfig: ArrayPluginConfig = {
-  languages: LANGUAGES,
+  languages: LANGUAGES as any,
   defaultLanguages: LANGUAGES.map((l) => l.id),
   fieldTypes: ["string", "text"],
 };

@@ -42,7 +42,13 @@ export const RelatedPublications = async ({
 
       <div className="mx-auto grid max-w-(--width-content-xl) grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {publications.slice(0, 4).map((pub) => (
-          <PublicationCard key={pub._id} publication={pub} layout="vertical" className="h-full" />
+          <PublicationCard
+            locale={locale}
+            key={pub._id}
+            publication={pub}
+            layout="vertical"
+            className="h-full"
+          />
         ))}
       </div>
     </Container>

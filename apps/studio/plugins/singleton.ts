@@ -2,7 +2,7 @@ import { type StructureBuilder } from "sanity/structure";
 import { capitalize } from "../utils/utils";
 
 import { DOCUMENTS } from "../config";
-const SINGLETONS = new Set(DOCUMENTS.map((s) => s.id));
+const SINGLETONS = new Set(DOCUMENTS.filter((s) => "id" in s).map((s) => s.id));
 
 /** List of actions available on singleton documents */
 export const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);

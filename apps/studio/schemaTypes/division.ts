@@ -21,6 +21,14 @@ export default defineType({
       validation: (Rule) => Rule.required().min(2).max(80),
     }),
     defineField({
+      name: "sortName",
+      title: "Nazwa do sortowania",
+      type: "string",
+      group: "content",
+      description:
+        "Nazwa używana do sortowania przedstawicielstw na listach. Jeśli nie zostanie wypełniona, użyta zostanie zwykła nazwa. Sanity nie obsługuje poprawnie sortowania polskich znaków. Polecane znaki to _, aby sortować przed poprzednią literą, lub ~ aby sortować po niej.",
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

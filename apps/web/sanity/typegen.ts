@@ -968,6 +968,7 @@ export type Division = {
   locale?: string;
   seo?: Seo;
   name?: string;
+  sortName?: string;
   slug?: Slug;
   coverImage?: Img;
   pageBuilder?: PageBuilder;

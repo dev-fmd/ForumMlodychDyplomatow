@@ -21,14 +21,14 @@ const SupportUsSection = ({ data, index }: PageBuilderSectionProps<"supportUsSec
           desktop: "60vw",
         }}
         className="h-full object-cover"
-        wrapperClassName="desktop:w-6/11"
+        wrapperClassName="desktop:w-fit"
         direction="bottom"
         desktopDirection="right"
         color="blue"
         size="sm"
         desktopSize="md"
       />
-      <div className="flex w-full flex-col items-stretch gap-16 px-2 pt-8 text-center desktop:w-5/11 desktop:justify-center desktop:gap-8 desktop:px-10">
+      <div className="mx-auto flex w-full flex-col items-stretch gap-16 px-2 pt-8 text-center desktop:w-5/11 desktop:justify-center desktop:gap-8 desktop:px-10">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <Typography variant="h2" as={getHeading(index)} className="text-white">

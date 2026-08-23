@@ -15,7 +15,7 @@ type Props = {
   socials: Socials;
   className?: string;
 };
-const iconClassName = "desktop:size-6 size-10";
+const iconClassName = "desktop:size-6 size-6 shrink-0";
 const icons = {
   facebook: <BsFacebook className={iconClassName} />,
   instagram: <BsInstagram className={iconClassName} />,
@@ -29,7 +29,7 @@ export const SocialIcons = ({ socials, className }: Props) => {
   return (
     <div
       className={cn(
-        "flex h-10 flex-row gap-1 text-[1.5rem] text-brand-red-900 desktop:h-6",
+        "flex h-10 flex-row flex-wrap gap-4 text-[1.5rem] text-brand-red-900 desktop:h-6",
         className
       )}
     >

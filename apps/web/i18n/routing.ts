@@ -7,5 +7,5 @@ export const routing = defineRouting({
   localePrefix: "as-needed",
 
   // Used when no locale matches
-  defaultLocale: locales[0],
+  defaultLocale: "pl",
 });

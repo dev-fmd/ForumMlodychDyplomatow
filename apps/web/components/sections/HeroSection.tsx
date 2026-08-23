@@ -14,10 +14,10 @@ const HeroSection = ({ data, index }: PageBuilderSectionProps<"heroSection">) =>
     >
       <div className="flex flex-col items-center gap-6 px-4 pb-10 desktop:gap-14 desktop:px-0 desktop:pb-0">
         <div className="flex max-w-4xl flex-col items-center gap-8 text-center desktop:text-left">
-          <Typography as={getHeading(index)} variant="h1">
+          <Typography as={getHeading(index)} variant="h1" className="text-center text-balance">
             {data.heading}
           </Typography>
-          <Typography className="text-gray-600" variant="body-xl">
+          <Typography className="text-center text-balance text-gray-600" variant="body-xl">
             {data.subheading}
           </Typography>
         </div>

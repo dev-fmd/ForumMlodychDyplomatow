@@ -6,8 +6,8 @@ import type { PaginationQueryFunction } from "../../../sanity/queries/pagination
 import type { PublicationPreview } from "../../../sanity/queries/publications";
 import { PublicationCard } from "@/components/ui/publication-card";
 
-const Card = ({ item }: { item: PublicationPreview }) => {
-  return <PublicationCard publication={item} />;
+const Card = ({ item, locale }: { item: PublicationPreview; locale: Locale }) => {
+  return <PublicationCard locale={locale} publication={item} />;
 };
 
 type Props = {

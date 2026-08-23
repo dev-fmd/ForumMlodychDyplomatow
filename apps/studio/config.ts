@@ -5,10 +5,10 @@ type LanguageConfig = {
   title: string;
 };
 
-export const LANGUAGES: LanguageConfig[] = [
+export const LANGUAGES = [
   { id: "pl", title: "PL" },
   { id: "en", title: "EN" },
-];
+] as const satisfies readonly LanguageConfig[];
 
 type DocumentConfig = {
   _type: string;
@@ -20,7 +20,7 @@ type DocumentConfig = {
 };
 
 // Please run `pnpm run singletons` to generate translation metadata pages when adding singleton types
-export const DOCUMENTS: DocumentConfig[] = [
+export const DOCUMENTS = [
   // { _type: "home", id: "home", intl: true, singleton: true, root: true },
   { _type: "settings", id: "settings" },
   { _type: "page", intl: true },
@@ -33,4 +33,6 @@ export const DOCUMENTS: DocumentConfig[] = [
   { _type: "tagCategory", intl: true },
   { _type: "translations", intl: true },
   { _type: "publicationType", intl: true },
-];
+] as const satisfies readonly DocumentConfig[];
+export type DocumentType = (typeof DOCUMENTS)[number]["_type"];
+export type LanguageId = (typeof LANGUAGES)[number]["id"];

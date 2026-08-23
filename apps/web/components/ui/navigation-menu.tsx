@@ -59,7 +59,7 @@ const navigationMenuTriggerStyle = cva([
   "group/navigation-menu-trigger",
   "inline-flex",
   "items-center justify-center",
-  "text-sm font-medium",
+  "text-md font-medium",
   "transition-all",
   "outline-none",
   "text-gray-700",

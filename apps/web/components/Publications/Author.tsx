@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useTranslations, type Locale } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Typography from "../ui/typography";
@@ -20,12 +20,12 @@ const Author = ({
   authors,
   date,
   isoDate,
-  title,
+  locale,
 }: {
   authors: AuthorInput[] | null;
   date?: string | null;
   isoDate?: string | null;
-  title: boolean;
+  locale: Locale;
 }) => {
   const t = useTranslations("publications");
 
@@ -52,7 +52,6 @@ const Author = ({
   }
 
   const displayName = isGroup ? t("groupName") : firstAuthor?.name || "";
-  const displayRole = isGroup ? "" : firstAuthor?.role || "";
   const displayInitials = isGroup
     ? t("groupInitials")
     : firstAuthor?.initials || getInitialsSync(firstAuthor?.name);
@@ -75,12 +74,17 @@ const Author = ({
         <div className="flex items-center">
           <Typography as="span" variant="body-s" className="text-brand-gray-600">
             {displayName}
-            {title && displayRole ? `, ${displayRole}` : ""}
           </Typography>
         </div>
         {date && (
           <Typography variant="caption" className="text-brand-gray-600" asChild>
-            <time dateTime={isoDate || date}>{date}</time>
+            <time dateTime={isoDate || date}>
+              {new Date(date).toLocaleDateString(locale, {
+                day: "numeric",
+                month: "numeric",
+                year: "numeric",
+              })}
+            </time>
           </Typography>
         )}
       </div>

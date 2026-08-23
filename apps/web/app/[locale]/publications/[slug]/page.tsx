@@ -102,7 +102,6 @@ export default async function PublicationDetailPage({ params }: { params: Promis
     .map((author) => ({
       name: author.name || "",
       initials: getInitials(author.name || ""),
-      role: "Ekspert FMD",
       imageUrl: author.img?.asset?.url ?? undefined,
       bio: author.bio ?? "",
     }));

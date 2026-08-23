@@ -76,15 +76,16 @@ export const Link = ({
       return cleanLink.href || "#";
     }
     if (cleanLink.linkType === "page" && cleanLink.href === "home") {
-      return `${locale}/`;
+      return `/`;
     }
-    return `${locale}${slugsByType[cleanLink.linkType]}${cleanLink.href}`;
+    return `${slugsByType[cleanLink.linkType]}${cleanLink.href}`;
   };
   const isExternal = link?.linkType === "href" || href?.startsWith("http");
   const rightIcon =
     isExternal && !noExternalIcon ? <ExternalLink className="size-[1em]" /> : iconRight;
   const fullHref = getHref();
-  const isCurrent = currentPathname && typeof fullHref === "string" && currentPathname === fullHref;
+  const isCurrent =
+    currentPathname && typeof fullHref === "string" && currentPathname === `${locale}${fullHref}`;
   return (
     <BaseLink
       href={fullHref}

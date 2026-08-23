@@ -82,9 +82,11 @@ export default defineConfig({
 
   document: {
     actions: (prev, ctx) => {
-      const translatedSchemaTypes = DOCUMENTS.filter((d) => d.intl).map((d) => d._type);
+      const translatedSchemaTypes = DOCUMENTS.filter((d) => "intl" in d && d.intl).map(
+        (d) => d._type
+      );
       const withSingletonActions = singletonDocumentActions(prev, ctx);
-      if (translatedSchemaTypes.includes(ctx.schemaType)) {
+      if ((translatedSchemaTypes as string[]).includes(ctx.schemaType)) {
         return [
           ...withSingletonActions,
           useDeleteTranslationAction,

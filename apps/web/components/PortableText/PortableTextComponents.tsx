@@ -69,24 +69,22 @@ export const basePortableTextComponents: PortableTextComponents = {
       <ul className="mb-6 ml-6 list-disc space-y-2 text-brand-gray-900">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-6 ml-6 list-decimal space-y-2 text-brand-gray-900">{children}</ol>
+      <ol className="nested-list mb-6 ml-6 list-decimal space-y-2 text-brand-gray-900">
+        {children}
+      </ol>
     ),
   },
 
   listItem: {
     bullet: ({ children }) => (
-      <li>
-        <Typography as="span" variant="body-l">
-          {children}
-        </Typography>
-      </li>
+      <Typography as="li" variant="body-l">
+        {children}
+      </Typography>
     ),
     number: ({ children }) => (
-      <li>
-        <Typography as="span" variant="body-l">
-          {children}
-        </Typography>
-      </li>
+      <Typography as="li" variant="body-l">
+        {children}
+      </Typography>
     ),
   },
 
@@ -128,8 +126,8 @@ export const basePortableTextComponents: PortableTextComponents = {
         <Link
           href={value?.href || "#"}
           target={target}
-          variant="link"
-          className="hover:text-brand-gray-900-400 text-brand-gray-900-blue border-none no-underline underline-offset-4 transition-colors hover:border-transparent"
+          variant="text"
+          className="inline-flex border-none p-0 text-brand-blue-800 no-underline underline-offset-4 transition-colors *:inline hover:border-transparent hover:text-brand-blue-700 hover:underline"
         >
           {children}
         </Link>
