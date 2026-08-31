@@ -22,7 +22,6 @@ const NewPublicationsList = async () => {
           {publications.map((pub, index) => (
             <PublicationCard
               key={pub._id}
-              locale={locale}
               publication={pub}
               layout={index === 0 ? "horizontal" : "vertical"}
             />
@@ -36,7 +35,6 @@ const NewPublicationsList = async () => {
           <PublicationCard
             key={pub._id}
             publication={pub}
-            locale={locale}
             layout={index === 0 ? "horizontal" : "vertical"}
             className={index === 0 ? "col-span-3" : undefined}
           />

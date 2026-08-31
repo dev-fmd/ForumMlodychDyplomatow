@@ -100,7 +100,7 @@ export const PublicationHero = async ({
             <div className="flex w-fit flex-col justify-between gap-4 py-1 sm:flex-row sm:items-start">
               {authors && authors.length > 0 ? (
                 <div className="flex flex-col gap-2">
-                  <Author locale={locale} authors={authors} date={date} isoDate={isoDate} />
+                  <Author authors={authors} date={date} isoDate={isoDate} />
 
                   {authorData.isGroup && (
                     <GroupAuthorsList authors={authors} showAuthorsText={t("showAuthors")} />

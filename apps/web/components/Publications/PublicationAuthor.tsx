@@ -53,7 +53,7 @@ export const PublicationAuthor = async ({
         <hr className="mb-2 h-px w-full shrink-0 border-none bg-border/60" />
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
           {/* Lewa strona: Karta autora (lub awatar grupy) */}
-          <Author locale={locale} authors={authors} date={date} isoDate={isoDate} />
+          <Author authors={authors} date={date} isoDate={isoDate} />
 
           {/* Prawa strona: Bio pojedynczego autora lub rozwijana lista dla grupy */}
           <div className="flex flex-col">

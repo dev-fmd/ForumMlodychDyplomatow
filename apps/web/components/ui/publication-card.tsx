@@ -1,25 +1,23 @@
 import { Typography } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
-import type { PublicationCard as PublicationCardType } from "../../sanity/queries/publications";
-import { Link } from "./link";
-import { SanityImage } from "../../sanity/image/SanityImage";
-import { Tag } from "./tag";
 import { ChevronRight } from "lucide-react";
-import { useTranslations, type Locale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { SanityImage } from "../../sanity/image/SanityImage";
+import type { PublicationCard as PublicationCardType } from "../../sanity/queries/publications";
 import Author from "../Publications/Author";
+import { Link } from "./link";
+import { Tag } from "./tag";
 
 export interface PublicationCardProps {
   publication: PublicationCardType;
   layout?: "vertical" | "horizontal";
   className?: string;
-  locale: Locale;
 }
 
 export const PublicationCard = ({
   publication,
   layout = "vertical",
   className,
-  locale,
 }: PublicationCardProps) => {
   const { title, excerpt, authors, date, tags = [], mainImage: image, slug } = publication;
   const t = useTranslations("publications");
@@ -99,7 +97,7 @@ export const PublicationCard = ({
 
         {/* Stopka z autorem */}
         <div className="mt-6 flex w-full flex-col border-t border-slate-100 pt-5">
-          <Author locale={locale} authors={authors} date={date} />
+          <Author authors={authors} date={date} />
         </div>
       </div>
     </Link>

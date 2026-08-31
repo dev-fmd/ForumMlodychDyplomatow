@@ -1,10 +1,10 @@
 "use client";
-import { useTranslations, type Locale } from "next-intl";
-import React, { useEffect, useState } from "react";
+import { AuthorInput } from "@/app/[locale]/publications/[slug]/helpers";
+import { getAuthorDataAction } from "@/lib/getAuthorServer";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Typography from "../ui/typography";
-import { getAuthorDataAction } from "@/lib/getAuthorServer";
-import { AuthorInput } from "@/app/[locale]/publications/[slug]/helpers";
 
 const getInitialsSync = (name?: string | null) => {
   if (!name) return "";
@@ -20,12 +20,10 @@ const Author = ({
   authors,
   date,
   isoDate,
-  locale,
 }: {
   authors: AuthorInput[] | null;
   date?: string | null;
   isoDate?: string | null;
-  locale: Locale;
 }) => {
   const t = useTranslations("publications");
 
@@ -78,13 +76,7 @@ const Author = ({
         </div>
         {date && (
           <Typography variant="caption" className="text-brand-gray-600" asChild>
-            <time dateTime={isoDate || date}>
-              {new Date(date).toLocaleDateString(locale, {
-                day: "numeric",
-                month: "numeric",
-                year: "numeric",
-              })}
-            </time>
+            <time dateTime={isoDate || date}>{date}</time>
           </Typography>
         )}
       </div>

@@ -7,7 +7,7 @@ import { Link } from "../ui/link";
 export const basePortableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <Typography as="p" variant="body-l" className="mb-6 text-brand-gray-900">
+      <Typography as="p" variant="body-l" className="mb-6 wrap-normal text-brand-gray-900">
         {children}
       </Typography>
     ),
@@ -66,10 +66,12 @@ export const basePortableTextComponents: PortableTextComponents = {
 
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-6 ml-6 list-disc space-y-2 text-brand-gray-900">{children}</ul>
+      <ul className="mb-6 ml-6 list-disc space-y-2 wrap-anywhere text-brand-gray-900">
+        {children}
+      </ul>
     ),
     number: ({ children }) => (
-      <ol className="nested-list mb-6 ml-6 list-decimal space-y-2 text-brand-gray-900">
+      <ol className="nested-list mb-6 ml-6 list-decimal space-y-2 wrap-anywhere text-brand-gray-900">
         {children}
       </ol>
     ),
@@ -77,12 +79,12 @@ export const basePortableTextComponents: PortableTextComponents = {
 
   listItem: {
     bullet: ({ children }) => (
-      <Typography as="li" variant="body-l">
+      <Typography as="li" variant="body-l" className="wrap-anywhere">
         {children}
       </Typography>
     ),
     number: ({ children }) => (
-      <Typography as="li" variant="body-l">
+      <Typography as="li" variant="body-l" className="wrap-anywhere">
         {children}
       </Typography>
     ),
