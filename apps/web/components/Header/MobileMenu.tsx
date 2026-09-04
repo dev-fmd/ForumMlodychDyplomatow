@@ -1,20 +1,31 @@
+"use client";
+import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
-import MenuIcon from "./MenuIcon";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import { getLocale, getTranslations } from "next-intl/server";
+import MenuIcon from "./MenuIcon";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 type Props = {
   children?: React.ReactNode;
 };
 
-const MobileMenu = async ({ children }: Props) => {
-  const locale = await getLocale();
-  const t = await getTranslations({ locale, namespace: "navigation" });
+const MobileMenu = ({ children }: Props) => {
+  const t = useTranslations("navigation");
+  const [isOpen, setIsOpen] = useState(false);
+  const path = usePathname();
+  useEffect(() => {
+    setIsOpen(false);
+  }, [path]);
   return (
     <div className="flex justify-self-end lg:hidden">
-      <Sheet>
+      <Sheet open={isOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" className="px-0 text-brand-red-900">
+          <Button
+            variant="ghost"
+            onClick={() => setIsOpen(true)}
+            className="px-0 text-brand-red-900"
+          >
             <MenuIcon />
             <span className="sr-only">{t("menu")}</span>
           </Button>

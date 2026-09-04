@@ -87,6 +87,14 @@ const Footer = async ({
                 </div>
               )
             )}
+            {header.button && (
+              <Link
+                link={header.button}
+                variant="nav"
+                size="inline"
+                className="px-3 font-normal text-brand-red-900 hover:text-brand-red-800 hover:underline desktop:px-2"
+              />
+            )}
           </div>
           <LocaleButtons />
         </div>
@@ -117,7 +125,12 @@ const Footer = async ({
               {footer.madeByText}{" "}
             </Typography>
             {footer.madeByLink && (
-              <Link link={footer.madeByLink} variant="text" className="font-normal" size="inline">
+              <Link
+                link={footer.madeByLink}
+                variant="text"
+                className="text-[0.75rem] font-normal"
+                size="inline"
+              >
                 <Typography as="span" variant="caption">
                   {footer.madeByLink.text}
                 </Typography>

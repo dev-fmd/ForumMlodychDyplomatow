@@ -48,7 +48,7 @@ const buttonVariants = cva(
         s: "h-8 gap-1 px-4 text-[0.75rem]",
         m: "h-10 gap-1.5 px-5 text-[0.875rem]",
         l: "h-13 gap-2 px-6 text-[1rem]",
-        inline: "",
+        inline: "gap-1",
         "icon-sm": "p-1.5",
       },
     },
