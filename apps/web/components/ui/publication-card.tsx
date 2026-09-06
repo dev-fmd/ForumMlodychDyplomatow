@@ -1,7 +1,7 @@
 import { Typography } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { SanityImage } from "../../sanity/image/SanityImage";
 import type { PublicationCard as PublicationCardType } from "../../sanity/queries/publications";
 import Author from "../Publications/Author";
@@ -21,6 +21,14 @@ export const PublicationCard = ({
 }: PublicationCardProps) => {
   const { title, excerpt, authors, date, tags = [], mainImage: image, slug } = publication;
   const t = useTranslations("publications");
+  const locale = useLocale();
+  const formattedDate = !date
+    ? ""
+    : new Date(date).toLocaleDateString(locale, {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      });
   return (
     <Link
       link={{
@@ -97,7 +105,7 @@ export const PublicationCard = ({
 
         {/* Stopka z autorem */}
         <div className="mt-6 flex w-full flex-col border-t border-slate-100 pt-5">
-          <Author authors={authors} date={date} />
+          <Author authors={authors} date={formattedDate} />
         </div>
       </div>
     </Link>
